@@ -1,0 +1,95 @@
+import random, time, os
+
+
+def dice_health():
+    dice_6 = random.randint(1,6)
+    dice_12 = random.randint(1,12)
+    health = (dice_6*dice_12)//2 + 10
+    return health
+
+def dice_strength():
+    dice_6 = random.randint(1,6)
+    dice_12 = random.randint(1,12)
+    strength = (dice_6*dice_12)//2 + 12
+    return strength
+
+
+while True:
+    health_one = dice_health()
+    strength_one = dice_strength()
+
+    print("CHARACTER BUILDER")
+    name_character_one = input("Name your Legend: ")
+    char_type_one = input("Character Type: Human, Elf, Wizard, Orc: ")
+    
+
+    print(name_character_one, "-", char_type_one)
+    time.sleep(1)
+    print(f"HEALTH: {health_one}")
+    print(f"STRENGTH: {strength_one}")
+    time.sleep(1)
+    
+    print("\nWho are they battling?")
+
+    health_two = dice_health()
+    strength_two = dice_strength()
+
+   
+    name_character_two = input("Name your Legend: ")
+    char_type_two = input("Character Type: Human, Elf, Wizard, Orc: ")
+    
+
+    print(name_character_two, "-", char_type_two)
+    time.sleep(1)
+    print(f"HEALTH: {health_two}")
+    print(f"STRENGTH: {strength_two}")
+    time.sleep(1)
+    os.system("cls")
+    
+    print("⚔️ BATTLE TIME ⚔️")
+    print("The battle begins!")
+    rounds = 0
+    while True:
+        
+        initiative = random.randint(1,6)
+        damage_one = random.randint(1,4) + strength_one//3
+        damage_two = random.randint(1,4) + strength_two//3        
+        
+        if initiative % 2 == 0:
+            attack = name_character_one
+            print(f"{name_character_one} attacks first")
+            time.sleep(1)
+        else:
+            attack = name_character_two
+            print(f"{name_character_two} attacks first")
+            time.sleep(1)
+
+        if attack == name_character_one:
+            print(f"{name_character_two} takes a 🗡️, with {damage_one} damage🩸")
+            time.sleep(3)
+            health_two -= damage_one
+            
+        else:
+            print(f"{name_character_one} takes a 🗡️, with {damage_two} damage🩸")
+            time.sleep(3)
+            health_one-= damage_two
+                
+        
+        print(f"\n{name_character_one} has {health_one}❤️" )
+        print(f"{name_character_two} has {health_two}❤️")
+        rounds+=1
+        if health_one <= 0 or health_two <= 0:
+            break
+        print("\nAnd they're both standing for the next round!")
+        time.sleep(4)
+        os.system("cls")
+        print("The battle continues!")
+
+    if health_one <= 0:
+        print(f"Oh, no {name_character_one.upper()} has died!☠️")
+        print(f"{name_character_two} destroyed {name_character_one} in {rounds} rounds! ✌️")
+        break
+    elif health_two <= 0:
+        print(f"Oh no {name_character_two.upper()} has died!")
+        print(f"{name_character_one} destroyed {name_character_two} in {rounds} rounds! ✌️")
+        break
