@@ -1,0 +1,76 @@
+import os, time
+
+agenda = []
+
+def view_agenda(list):
+    for row in list:
+      for column in row:
+        print(column, end=" | ")
+      print()
+
+def view_priority(list, level):
+  for i in list:
+    for j in i:
+      if j == level.capitalize():  
+        for x in i:
+          print(x, end=" | ")
+        print()
+
+while True:
+    print("Life organizer".upper())
+    todo = int(input("🗓️  What do you wanto to do? \n1. ADD\n2. VIEW\n3. EDIT\n4. REMOVE\n5. QUIT\n>>>>"))
+    if todo == 1:
+        task = input("What task do you need to do?: ").capitalize()
+        when = input("Day of week: ").capitalize()
+        priority = input("Its priority is low/high/medium?: ").capitalize()
+        agenda.append([task, when, priority])
+        time.sleep(0.5)
+        print("Thanks, this task has been added.")
+        quit = input("Do you want to see the menu again or quit?: ").strip()
+        if quit[0] == "q":
+            break
+        else:
+            os.system("cls")
+    elif todo == 2:
+        option = int(input("1. VIEW ALL\n2. VIEW PRIORITY\n>>>"))
+        if option == 1:
+            if agenda == []:
+                print("No data found")
+                time.sleep(1.5)
+                os.system("cls")
+            else:
+                view_agenda(agenda)
+                time.sleep(4)
+                os.system("cls")
+        if option == 2:
+            if agenda == []:
+                print("No data found")
+                time.sleep(1.5)
+                os.system("cls")
+            else:
+                level = input("What level of priority?(low/high/medium): ").capitalize()
+                view_priority(agenda, level)
+                time.sleep(3)
+                os.system("cls")
+    elif todo == 3:
+       edit_task = input("What would you like to edit?: ").capitalize()
+       for row in agenda:
+          if row[0] == edit_task:
+            agenda.remove(row)
+            task = input("What task do you need to do?: ").capitalize()
+            when = input("Day of week: ").capitalize()
+            priority = input("Its priority is low/high/medium?: ").capitalize()
+            agenda.append([task, when, priority])
+            print("Task edited")
+            time.sleep(1) 
+            os.system("cls")            
+    elif todo == 4:
+       remove_task = input("What would you like to remove?: ").capitalize()
+       for row in agenda:
+          if row[0] == remove_task:
+             agenda.remove(row)
+             print("Task removed")
+             time.sleep(1)
+             os.system("cls")   
+    elif todo == 5:
+       exit()
