@@ -1,0 +1,63 @@
+import random, os, time
+
+def strength_stats():
+    strength = random.randint(380, 600)
+    return strength
+def skill_stats():
+    skill = random.randint(40,80)
+    return skill
+def magic_stats():
+    magic_power = random.randint(250,450)
+    return magic_power
+def fear_stats():
+    fear_factor = random.randint(120,200)
+    return fear_factor
+
+deck = {"Tiamat": {"Strength": strength_stats(), "Skill": skill_stats(), "Magic Power": magic_stats(), "Fear Factor": fear_stats()},
+        "Shenlong": {"Strength": strength_stats(), "Skill": skill_stats(), "Magic Power": magic_stats(), "Fear Factor": fear_stats()},
+        "Fafnir": {"Strength": strength_stats(), "Skill": skill_stats(), "Magic Power": magic_stats(), "Fear Factor": fear_stats()},
+        "Azi Dahaka": {"Strength": strength_stats(), "Skill": skill_stats(), "Magic Power": magic_stats(), "Fear Factor": fear_stats()},
+        "Bahamut": {"Strength": strength_stats(), "Skill": skill_stats(), "Magic Power": magic_stats(), "Fear Factor": fear_stats()},
+        "Midir": {"Strength": strength_stats(), "Skill": skill_stats(), "Magic Power": magic_stats(), "Fear Factor": fear_stats()}}
+
+while True:
+    print("🐉 Top Triumph Dragons 🔥")
+    print()
+    for dragon in deck.keys(): #Menu to pick the dragons
+        print(f"{dragon}", end="\n")
+
+    option = input("Pick your dragon:\n>>>> ").title()
+    time.sleep(0.5)
+    print("Computer is picking a rival dragon...")
+    time.sleep(2)
+    computer = random.choice(list(deck.keys()))
+    print(f"Rival picked \033[34m{computer}\033[0m")
+    time.sleep(2)
+    os.system("cls")
+
+
+    print("""Choose your stats:
+    Strength
+    Skill
+    Magic Power
+    Fear Factor
+    Random""")
+
+
+    stats = input(">>>>> ").title()
+    time.sleep(0.4)
+    print(f"{option} has {deck[option][stats]} in {stats}")
+    print(f"{computer} has {deck[computer][stats]} in {stats}")
+    if deck[option][stats] > deck[computer][stats]:
+        
+        print(f"\033[31m*** {option} won ***\033[0m")
+    elif deck[option][stats] < deck[computer][stats]:
+        print(f"\033[31m*** {computer} won ***\033[0m")
+    else: 
+        print("DRAW")
+    time.sleep(1)
+    again = input("Play again? s/n: ").strip()
+    if again[0] == "n":
+        exit()
+    else:
+        os.system("cls")
